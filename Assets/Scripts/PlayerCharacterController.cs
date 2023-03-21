@@ -12,12 +12,17 @@ public class PlayerCharacterController : MonoBehaviour
     public Joystick leftJoystick;
     [SerializeField] private float speed;
     private Rigidbody2D _rb;
-    private float horizontal;
     private float vertical;
-    private Vector2 _movementSpeed;
+    [SerializeField] private float maxMoveSpeed = 4f;
     private Vector2 _direction;
     private Vector2 _rotation;
     private Transform transform;
+
+    [SerializeField] private float turnSpeed = 3;
+
+    // [SerializeField] private float linearDrag = 10f;
+    [SerializeField] private GameObject leftEngine;
+    [SerializeField] private GameObject rightEngine;
 
     private void Start()
     {
@@ -27,12 +32,53 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void Update()
     {
-        horizontal = leftJoystick.Horizontal;
-        vertical = leftJoystick.Vertical;
-
-        _movementSpeed = new Vector2(horizontal, vertical) * speed;
-
-        _rb.velocity = _movementSpeed;
-        _direction = rightJoystick.Direction;
+        if (rightJoystick.Horizontal > 0)
+        {
+            rightEngine.SetActive(true);
+            leftEngine.SetActive(false);
+        }
+        else if (rightJoystick.Horizontal < 0)
+        {
+            rightEngine.SetActive(false);
+            leftEngine.SetActive(true);
+        }
+        else
+        {
+            rightEngine.SetActive(false);
+            leftEngine.SetActive(false);
+        }
     }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+        // ApplyLinearDrag();
+    }
+
+    private void MovePlayer()
+    {
+        vertical = leftJoystick.Vertical;
+        if (vertical != 0)
+        {
+            _rb.AddForce((vertical > 0 ? transform.up : -transform.up) * speed);
+        }
+
+        transform.rotation *= Quaternion.AngleAxis(rightJoystick.Horizontal * turnSpeed, Vector3.forward);
+
+        if (Mathf.Abs(_rb.velocity.x) > maxMoveSpeed)
+            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * maxMoveSpeed, 0);
+    }
+
+
+    // private void ApplyLinearDrag()
+    // {
+    //     if (Mathf.Abs(horizontal) < 0.4f || Mathf.Abs(vertical) < 0.4f) //|| changingDirection)
+    //     {
+    //         _rb.drag = linearDrag;
+    //     }
+    //     else
+    //     {
+    //         _rb.drag = 0f;
+    //     }
+    // }
 }
