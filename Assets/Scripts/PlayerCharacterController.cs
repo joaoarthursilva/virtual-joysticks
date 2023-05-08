@@ -16,7 +16,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private float maxMoveSpeed = 4f;
     private Vector2 _direction;
     private Vector2 _rotation;
-    private Transform transform;
+    private Transform _transform;
 
     [SerializeField] private float turnSpeed = 3;
 
@@ -27,7 +27,7 @@ public class PlayerCharacterController : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        transform = gameObject.transform;
+        _transform = gameObject.transform;
     }
 
     private void Update()
@@ -60,10 +60,10 @@ public class PlayerCharacterController : MonoBehaviour
         vertical = leftJoystick.Vertical;
         if (vertical != 0)
         {
-            _rb.AddForce((vertical > 0 ? transform.up : -transform.up) * speed);
+            _rb.AddForce((vertical > 0 ? _transform.up : -_transform.up) * speed);
         }
 
-        transform.rotation *= Quaternion.AngleAxis(rightJoystick.Horizontal * turnSpeed, Vector3.forward);
+        _transform.rotation *= Quaternion.AngleAxis(rightJoystick.Horizontal * turnSpeed, Vector3.forward);
 
         if (Mathf.Abs(_rb.velocity.x) > maxMoveSpeed)
             _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * maxMoveSpeed, 0);
