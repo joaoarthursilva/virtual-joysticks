@@ -7,6 +7,4 @@ public class Engine : Item
 {
     public int propulsionSpeed;
     public int rotationSpeed;
-    
-    
 }

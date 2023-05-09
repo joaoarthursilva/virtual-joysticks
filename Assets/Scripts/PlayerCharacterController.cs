@@ -1,19 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    public Joystick rightJoystick;
-    public Joystick leftJoystick;
-    [SerializeField] private float speed;
+    public Joystick rightJoystick { get; set; }
+    public Joystick leftJoystick { get; set; }
+    public float speed { get; set; }
     private Rigidbody2D _rb;
     private float vertical;
-    [SerializeField] private float maxMoveSpeed = 4f;
+    public float maxMoveSpeed { get; set; }
+    public Engine engine;
     private Vector2 _direction;
     private Vector2 _rotation;
     private Transform _transform;

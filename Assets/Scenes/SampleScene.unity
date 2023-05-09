@@ -768,10 +768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ebe385da07d5d545b64e61bf9fa09cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightJoystick: {fileID: 0}
-  leftJoystick: {fileID: 0}
-  speed: 5
-  maxMoveSpeed: 8
   turnSpeed: 3
   leftEngine: {fileID: 720067926}
   rightEngine: {fileID: 1708945801}
@@ -1123,7 +1119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1296110980
 MonoBehaviour:
   m_ObjectHideFlags: 0

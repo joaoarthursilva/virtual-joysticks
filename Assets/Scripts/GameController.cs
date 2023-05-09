@@ -9,8 +9,9 @@ public class GameController : MonoBehaviour
     private Joystick[] joysticks;
     private PlayerCharacterController playerCharacterController;
     private CameraPos cam;
-
-    private void Awake()
+    [SerializeField] private Player player;
+    
+    private void Start()
     {
         ManageInstances();
         ControlJoysticks();
@@ -19,9 +20,23 @@ public class GameController : MonoBehaviour
 
     private void ManageInstances()
     {
+        ManageSetupInstances();
+        ManagePlayerInstance();
+    }
+
+    private void ManagePlayerInstance()
+    {
+        playerCharacterController = FindObjectOfType<PlayerCharacterController>();
+        playerCharacterController.maxMoveSpeed = player.maxSpeed;
+        playerCharacterController.engine = player.engine;
+
+    }
+
+    private void ManageSetupInstances()
+    {
         cam = FindObjectOfType<CameraPos>();
         joysticks = FindObjectsOfType<Joystick>();
-        playerCharacterController = FindObjectOfType<PlayerCharacterController>();
+        
     }
 
     private void ControlJoysticks()

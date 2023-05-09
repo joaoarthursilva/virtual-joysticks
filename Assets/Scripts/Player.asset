@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16028f42289ecc844aececfdf87066ee, type: 3}
-  m_Name: Engine Number 2
+  m_Script: {fileID: 11500000, guid: 1b9be2dbdc0430c46999d5bff22b010e, type: 3}
+  m_Name: Player
   m_EditorClassIdentifier: 
-  level: 1
-  propulsionSpeed: 5
-  rotationSpeed: 2
+  maxSpeed: 8
+  engine: {fileID: 11400000, guid: 32b88972f542e724fa66c419b3281a0e, type: 2}
